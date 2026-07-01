@@ -206,3 +206,38 @@ window.addEventListener("hashchange", showPageFromHash);
 
 setLanguage(localStorage.getItem("kikuyu-lang") || "en");
 showPageFromHash();
+
+const revealTargets = [
+  ".hero-copy",
+  ".hero-image",
+  ".section-block",
+  ".category-card",
+  ".product-card",
+  ".about-band",
+  ".photo-stack",
+  ".about-copy",
+  ".world-card",
+  ".detail-layout",
+  ".detail-info",
+  ".site-footer"
+];
+
+document.querySelectorAll(revealTargets.join(",")).forEach((node, index) => {
+  node.classList.add("reveal");
+  node.style.transitionDelay = `${Math.min(index % 6, 5) * 55}ms`;
+});
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach((node) => revealObserver.observe(node));
+} else {
+  document.querySelectorAll(".reveal").forEach((node) => node.classList.add("is-visible"));
+}
