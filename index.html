@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kikuyu room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="logo" href="#home" aria-label="kikuyu room home">
+        k<span class="star-dot">i</span>kuyu room
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#home" data-i18n="nav.shop">shop</a>
+        <a href="#categories" data-i18n="nav.categories">categories</a>
+        <a href="#diary" data-i18n="nav.diary">diary</a>
+        <a href="#about" data-i18n="nav.about">about</a>
+      </nav>
+      <div class="header-actions">
+        <div class="language-toggle" aria-label="Language selector">
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="zh" type="button">中文</button>
+        </div>
+        <a class="soft-button desktop-only" href="#detail" data-i18n="nav.enter">enter the room</a>
+        <button class="menu-button" type="button" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="page page-home active" data-page="home">
+        <section class="hero section-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="home.eyebrow">new room drop / 2000s soft things</p>
+            <h1 data-i18n="home.heroTitle">a tiny room for clothes, paper goods, and soft home objects</h1>
+            <p class="lede" data-i18n="home.heroCopy">
+              kikuyu room collects dreamy daily pieces: ribbon accessories, pastel stationery, cute homeware, and clothing that feels like a saved photo from your favorite folder.
+            </p>
+            <div class="hero-buttons">
+              <a class="primary-button" href="#products" data-i18n="home.shopArrivals">shop arrivals</a>
+              <a class="secondary-button" href="#diary" data-i18n="home.viewDiary">view diary</a>
+            </div>
+          </div>
+          <figure class="hero-image">
+            <img src="assets/hero-room.png" alt="Pastel kikuyu room product display" />
+            <figcaption data-i18n="home.heroNote">dream room objects, selected weekly</figcaption>
+          </figure>
+        </section>
+
+        <section id="categories" class="section-block">
+          <h2 data-i18n="home.categoriesTitle">shop by room mood</h2>
+          <div class="category-grid">
+            <article class="category-card pink">
+              <img src="assets/bag.jpg" alt="Blue shoulder bag" />
+              <div>
+                <h3 data-i18n="cat.wear">wear</h3>
+                <p data-i18n="cat.wearSub">soft layers, room tees, ribbon skirts</p>
+              </div>
+            </article>
+            <article class="category-card mint">
+              <img src="assets/accessories.jpg" alt="Bear hair clips" />
+              <div>
+                <h3 data-i18n="cat.accessories">accessories</h3>
+                <p data-i18n="cat.accessoriesSub">bows, charms, tiny bags, clips</p>
+              </div>
+            </article>
+            <article class="category-card blue">
+              <img src="assets/paper-goods.jpg" alt="Pastel stationery desk" />
+              <div>
+                <h3 data-i18n="cat.paper">paper goods</h3>
+                <p data-i18n="cat.paperSub">stickers, notes, diaries, cards</p>
+              </div>
+            </article>
+            <article class="category-card yellow">
+              <img src="assets/home-goods.jpg" alt="Cafe cup and dessert display" />
+              <div>
+                <h3 data-i18n="cat.home">home</h3>
+                <p data-i18n="cat.homeSub">mugs, cushions, trays, lamps</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="products" class="section-block">
+          <div class="section-heading">
+            <h2 data-i18n="home.newTitle">new in the room</h2>
+            <p data-i18n="home.newSub">small things that make a desk, bed, or outfit feel more like you</p>
+          </div>
+          <div class="product-grid">
+            <article class="product-card">
+              <a href="#detail"><img src="assets/bag.jpg" alt="Pink ribbon shoulder bag" /></a>
+              <h3 data-i18n="product.bag">pink ribbon shoulder bag</h3>
+              <p data-i18n="product.bagSub">cream body with soft pink trim</p>
+              <strong>$38</strong>
+            </article>
+            <article class="product-card">
+              <img src="assets/accessories.jpg" alt="Bear clip set" />
+              <h3 data-i18n="product.clips">bear clip set</h3>
+              <p data-i18n="product.clipsSub">soft clips for hair or bags</p>
+              <strong>$12</strong>
+            </article>
+            <article class="product-card">
+              <img src="assets/paper-goods.jpg" alt="Dream folder memo pad" />
+              <h3 data-i18n="product.memo">dream folder memo pad</h3>
+              <p data-i18n="product.memoSub">desk notes with sticker mood</p>
+              <strong>$9</strong>
+            </article>
+            <article class="product-card">
+              <img src="assets/home-goods.jpg" alt="Cream cafe cup set" />
+              <h3 data-i18n="product.cup">cream cafe cup set</h3>
+              <p data-i18n="product.cupSub">ceramic cup for warm milk days</p>
+              <strong>$18</strong>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" class="about-band section-grid">
+          <div class="photo-stack">
+            <img class="photo-one" src="assets/room-display.jpg" alt="Pastel room charm display" />
+            <img class="photo-two" src="assets/paper-goods.jpg" alt="Pastel stationery" />
+            <img class="photo-three" src="assets/accessories.jpg" alt="Small accessories" />
+          </div>
+          <div class="about-copy">
+            <p class="eyebrow" data-i18n="about.eyebrow">about kikuyu room</p>
+            <h2 data-i18n="about.title">made for people who save cute rooms, tiny objects, and old digital-camera light</h2>
+            <p data-i18n="about.copy">
+              The brand language is soft but not plain: y2k curves, Korean shop styling, dreamcore haze, and useful everyday pieces.
+            </p>
+            <a class="soft-button" href="#diary" data-i18n="about.button">brand diary</a>
+          </div>
+        </section>
+
+        <section id="diary" class="section-block">
+          <h2 data-i18n="world.title">four tiny worlds</h2>
+          <div class="world-grid">
+            <article class="world-card pink"><span>★</span><h3 data-i18n="world.wear">room wear</h3><p data-i18n="world.wearSub">soft pieces for mirror photos</p></article>
+            <article class="world-card mint"><span>★</span><h3 data-i18n="world.charms">daily charms</h3><p data-i18n="world.charmsSub">clips, bows, beads and bags</p></article>
+            <article class="world-card blue"><span>★</span><h3 data-i18n="world.desk">paper desk</h3><p data-i18n="world.deskSub">stickers, memos and diaries</p></article>
+            <article class="world-card yellow"><span>★</span><h3 data-i18n="world.mood">home mood</h3><p data-i18n="world.moodSub">cups, trays and plush corners</p></article>
+          </div>
+        </section>
+      </section>
+
+      <section id="detail" class="page page-detail" data-page="detail">
+        <p class="breadcrumb" data-i18n="detail.breadcrumb">shop / accessories / pink ribbon shoulder bag</p>
+        <section class="detail-layout">
+          <div class="gallery">
+            <figure class="main-product-image">
+              <img src="assets/bag.jpg" alt="Pink ribbon shoulder bag" />
+              <figcaption>room favorite</figcaption>
+            </figure>
+            <div class="thumbnail-row">
+              <img class="active" src="assets/bag.jpg" alt="Shoulder bag thumbnail" />
+              <img src="assets/accessories.jpg" alt="Accessories thumbnail" />
+              <img src="assets/paper-goods.jpg" alt="Paper goods thumbnail" />
+              <img src="assets/home-goods.jpg" alt="Home goods thumbnail" />
+            </div>
+          </div>
+
+          <aside class="product-panel">
+            <span class="tag" data-i18n="detail.tag">new drop</span>
+            <h1 data-i18n="detail.title">pink ribbon shoulder bag</h1>
+            <p data-i18n="detail.subtitle">奶油包身配柔粉边 / cream body with soft pink trim</p>
+            <strong class="detail-price">$38</strong>
+            <p data-i18n="detail.copy">
+              A soft daily bag for room photos, cafe walks, sticker books, and tiny charms.
+            </p>
+            <div class="option-group">
+              <p data-i18n="detail.color">color</p>
+              <button class="swatch active pink-swatch" type="button" aria-label="Pink"></button>
+              <button class="swatch blue-swatch" type="button" aria-label="Blue"></button>
+              <button class="swatch cream-swatch" type="button" aria-label="Cream"></button>
+            </div>
+            <div class="buy-row">
+              <div class="quantity" aria-label="Quantity selector">
+                <button type="button" data-qty="-1">-</button>
+                <span id="qty">1</span>
+                <button type="button" data-qty="1">+</button>
+              </div>
+              <button class="primary-button cart-button" type="button" data-i18n="detail.cart">add to cart</button>
+            </div>
+            <button class="secondary-button wide" type="button" data-i18n="detail.save">save for later</button>
+            <p class="shipping-note" data-i18n="detail.shipMini">ships in 3-5 days / gift wrapping available</p>
+          </aside>
+        </section>
+
+        <section class="detail-info">
+          <article class="story-card">
+            <h2 data-i18n="detail.storyTitle">why it belongs in the room</h2>
+            <p data-i18n="detail.storyCopy">Styled for the kikuyu room universe: soft pink trim, light blue body, and enough surface for charms.</p>
+            <div class="mini-strip">
+              <img src="assets/accessories.jpg" alt="Accessory styling" />
+              <img src="assets/paper-goods.jpg" alt="Paper goods styling" />
+              <img src="assets/home-goods.jpg" alt="Home goods styling" />
+            </div>
+          </article>
+          <div class="accordion-list">
+            <div><strong data-i18n="detail.materials">materials</strong><span data-i18n="detail.materialsBody">soft faux leather, printed front panel</span></div>
+            <div><strong data-i18n="detail.size">size</strong><span data-i18n="detail.sizeBody">phone, wallet, memo pad</span></div>
+            <div><strong data-i18n="detail.care">care</strong><span data-i18n="detail.careBody">wipe gently, avoid rain</span></div>
+            <div><strong data-i18n="detail.shipping">shipping</strong><span data-i18n="detail.shippingBody">3-5 days processing</span></div>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <h2 data-i18n="detail.complete">complete the room</h2>
+          <div class="product-grid recommendations">
+            <article class="product-card"><img src="assets/accessories.jpg" alt="Bear clip set" /><h3 data-i18n="product.clips">bear clip set</h3><strong>$12</strong></article>
+            <article class="product-card"><img src="assets/paper-goods.jpg" alt="Dream memo pad" /><h3 data-i18n="product.memo">dream folder memo pad</h3><strong>$9</strong></article>
+            <article class="product-card"><img src="assets/home-goods.jpg" alt="Cafe cup set" /><h3 data-i18n="product.cup">cream cafe cup set</h3><strong>$18</strong></article>
+            <article class="product-card"><img src="assets/room-display.jpg" alt="Room charm display" /><h3 data-i18n="product.room">room charm display</h3><strong>$24</strong></article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="logo footer-logo" href="#home">k<span class="star-dot">i</span>kuyu room</a>
+        <h2 data-i18n="footer.title">get the next room note</h2>
+        <p data-i18n="footer.copy">soft drops, styling notes, and small dreamy objects when they arrive.</p>
+      </div>
+      <form class="signup-form">
+        <input type="email" data-i18n-placeholder="footer.email" placeholder="your email" />
+        <button type="submit" data-i18n="footer.join">join</button>
+      </form>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
