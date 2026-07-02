@@ -553,11 +553,28 @@ function updateDetail() {
 }
 
 function showPageFromHash() {
-  const detail = location.hash.startsWith("#detail");
+  const hash = location.hash || "#home";
+  const pageName = hash.startsWith("#detail")
+    ? "detail"
+    : hash.startsWith("#about-page")
+      ? "about"
+      : hash.startsWith("#notes-page")
+        ? "notes"
+        : "home";
+
   document.querySelectorAll(".page").forEach((page) => {
-    page.classList.toggle("active", page.dataset.page === (detail ? "detail" : "home"));
+    page.classList.toggle("active", page.dataset.page === pageName);
   });
-  if (detail) window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (pageName !== "home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+
+  const target = document.querySelector(hash);
+  if (target && hash !== "#home") {
+    setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 20);
+  }
 }
 
 document.addEventListener("click", (event) => {
