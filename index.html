@@ -6,20 +6,18 @@
     <title>kikuyu room</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="sky" aria-hidden="true"></div>
 
     <header class="site-header">
-      <a class="logo" href="#home" aria-label="kikuyu room home">
-        k<span class="star-dot">i</span>kuyu room
-      </a>
+      <a class="logo" href="#home" aria-label="kikuyu room home">k<span class="star-dot">i</span>kuyu room</a>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#home" data-i18n="nav.shop">shop</a>
-        <a href="#categories" data-i18n="nav.categories">categories</a>
-        <a href="#diary" data-i18n="nav.diary">diary</a>
+        <a href="#shop" data-i18n="nav.shop">shop</a>
+        <a href="#categories" data-i18n="nav.categories">worlds</a>
+        <a href="#room-notes" data-i18n="nav.notes">room notes</a>
         <a href="#about" data-i18n="nav.about">about</a>
       </nav>
       <div class="header-actions">
@@ -27,7 +25,7 @@
           <button class="lang-btn active" data-lang="en" type="button">EN</button>
           <button class="lang-btn" data-lang="zh" type="button">中文</button>
         </div>
-        <a class="soft-button desktop-only" href="#detail" data-i18n="nav.enter">enter the room</a>
+        <a class="soft-button desktop-only" href="#shop" data-i18n="nav.enter">enter the room</a>
         <button class="menu-button" type="button" aria-label="Open menu">
           <span></span>
           <span></span>
@@ -39,87 +37,101 @@
       <section id="home" class="page page-home active" data-page="home">
         <section class="hero section-grid">
           <div class="hero-copy">
-            <p class="eyebrow" data-i18n="home.eyebrow">new room drop / 2000s soft things</p>
-            <h1 data-i18n="home.heroTitle">a tiny room for clothes, paper goods, and soft home objects</h1>
+            <p class="eyebrow" data-i18n="home.eyebrow">brand universe / a vessel for time</p>
+            <h1 data-i18n="home.heroTitle">ordinary days deserve beautiful things</h1>
             <p class="lede" data-i18n="home.heroCopy">
-              kikuyu room collects dreamy daily pieces: ribbon accessories, pastel stationery, cute homeware, and clothing that feels like a saved photo from your favorite folder.
+              Kikuyu Room collects small objects for the room you slowly build inside yourself: clothes, charms, paper goods, and home moods that hold time.
             </p>
             <div class="hero-buttons">
-              <a class="primary-button" href="#products" data-i18n="home.shopArrivals">shop arrivals</a>
-              <a class="secondary-button" href="#diary" data-i18n="home.viewDiary">view diary</a>
+              <a class="primary-button" href="#shop" data-i18n="home.shopArrivals">shop the worlds</a>
+              <a class="secondary-button" href="#about" data-i18n="home.readWorld">read the universe</a>
             </div>
           </div>
           <figure class="hero-image">
             <img src="assets/hero-room.png" alt="Pastel kikuyu room product display" />
-            <figcaption data-i18n="home.heroNote">dream room objects, selected weekly</figcaption>
+            <figcaption data-i18n="home.heroNote">not a time machine, a vessel for time</figcaption>
           </figure>
         </section>
 
         <section id="categories" class="section-block">
-          <h2 data-i18n="home.categoriesTitle">shop by room mood</h2>
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="world.eyebrow">four tiny worlds</p>
+            <h2 data-i18n="world.title">every product belongs to a way of living</h2>
+          </div>
           <div class="category-grid">
-            <article class="category-card pink">
-              <img src="assets/bag.jpg" alt="Blue shoulder bag" />
+            <a class="category-card pink" href="#shop" data-filter-link="wear">
+              <img src="assets/products/sunday-window-tee.jpg" alt="Room wear mood" />
               <div>
-                <h3 data-i18n="cat.wear">wear</h3>
-                <p data-i18n="cat.wearSub">soft layers, room tees, ribbon skirts</p>
+                <h3 data-i18n="cat.wear">Room Wear</h3>
+                <p data-i18n="cat.wearSub">the clothes you wear when nobody is watching</p>
               </div>
-            </article>
-            <article class="category-card mint">
-              <img src="assets/accessories.jpg" alt="Bear hair clips" />
+            </a>
+            <a class="category-card mint" href="#shop" data-filter-link="charms">
+              <img src="assets/products/memory-ribbon-bag.jpg" alt="Daily charms mood" />
               <div>
-                <h3 data-i18n="cat.accessories">accessories</h3>
-                <p data-i18n="cat.accessoriesSub">bows, charms, tiny bags, clips</p>
+                <h3 data-i18n="cat.charms">Daily Charms</h3>
+                <p data-i18n="cat.charmsSub">objects that quietly follow you through the day</p>
               </div>
-            </article>
-            <article class="category-card blue">
-              <img src="assets/paper-goods.jpg" alt="Pastel stationery desk" />
+            </a>
+            <a class="category-card blue" href="#shop" data-filter-link="paper">
+              <img src="assets/products/someday-notebook.jpg" alt="Paper desk mood" />
               <div>
-                <h3 data-i18n="cat.paper">paper goods</h3>
-                <p data-i18n="cat.paperSub">stickers, notes, diaries, cards</p>
+                <h3 data-i18n="cat.paper">Paper Desk</h3>
+                <p data-i18n="cat.paperSub">a desk that remembers things for you</p>
               </div>
-            </article>
-            <article class="category-card yellow">
-              <img src="assets/home-goods.jpg" alt="Cafe cup and dessert display" />
+            </a>
+            <a class="category-card yellow" href="#shop" data-filter-link="home">
+              <img src="assets/products/late-night-mug.jpg" alt="Home mood" />
               <div>
-                <h3 data-i18n="cat.home">home</h3>
-                <p data-i18n="cat.homeSub">mugs, cushions, trays, lamps</p>
+                <h3 data-i18n="cat.home">Home Mood</h3>
+                <p data-i18n="cat.homeSub">not home goods, home mood</p>
               </div>
-            </article>
+            </a>
           </div>
         </section>
 
-        <section id="products" class="section-block">
-          <div class="section-heading">
-            <h2 data-i18n="home.newTitle">new in the room</h2>
-            <p data-i18n="home.newSub">small things that make a desk, bed, or outfit feel more like you</p>
+        <section id="shop" class="section-block shop-section">
+          <div class="section-heading shop-heading">
+            <div>
+              <p class="eyebrow" data-i18n="shop.eyebrow">shop</p>
+              <h2 data-i18n="shop.title">twenty small coordinates of time</h2>
+            </div>
+            <p data-i18n="shop.copy">Search, filter by world, and sort the collection. Each piece is a small coordinate for ordinary days worth keeping.</p>
           </div>
-          <div class="product-grid">
-            <article class="product-card">
-              <a href="#detail"><img src="assets/bag.jpg" alt="Pink ribbon shoulder bag" /></a>
-              <h3 data-i18n="product.bag">pink ribbon shoulder bag</h3>
-              <p data-i18n="product.bagSub">cream body with soft pink trim</p>
-              <strong>$38</strong>
-            </article>
-            <article class="product-card">
-              <img src="assets/accessories.jpg" alt="Bear clip set" />
-              <h3 data-i18n="product.clips">bear clip set</h3>
-              <p data-i18n="product.clipsSub">soft clips for hair or bags</p>
-              <strong>$12</strong>
-            </article>
-            <article class="product-card">
-              <img src="assets/paper-goods.jpg" alt="Dream folder memo pad" />
-              <h3 data-i18n="product.memo">dream folder memo pad</h3>
-              <p data-i18n="product.memoSub">desk notes with sticker mood</p>
-              <strong>$9</strong>
-            </article>
-            <article class="product-card">
-              <img src="assets/home-goods.jpg" alt="Cream cafe cup set" />
-              <h3 data-i18n="product.cup">cream cafe cup set</h3>
-              <p data-i18n="product.cupSub">ceramic cup for warm milk days</p>
-              <strong>$18</strong>
-            </article>
+
+          <div class="shop-controls" aria-label="Shop controls">
+            <label class="search-box">
+              <span data-i18n="shop.searchLabel">search</span>
+              <input id="product-search" type="search" data-i18n-placeholder="shop.searchPlaceholder" placeholder="Search tee, mug, notebook..." />
+            </label>
+            <label class="select-box">
+              <span data-i18n="shop.categoryLabel">category</span>
+              <select id="category-filter">
+                <option value="all" data-i18n="filter.all">All worlds</option>
+                <option value="wear" data-i18n="filter.wear">Room Wear</option>
+                <option value="charms" data-i18n="filter.charms">Daily Charms</option>
+                <option value="paper" data-i18n="filter.paper">Paper Desk</option>
+                <option value="home" data-i18n="filter.home">Home Mood</option>
+              </select>
+            </label>
+            <label class="select-box">
+              <span data-i18n="shop.sortLabel">sort</span>
+              <select id="sort-products">
+                <option value="featured" data-i18n="sort.featured">Featured</option>
+                <option value="price-asc" data-i18n="sort.low">Price: low to high</option>
+                <option value="price-desc" data-i18n="sort.high">Price: high to low</option>
+                <option value="name" data-i18n="sort.name">Name A-Z</option>
+              </select>
+            </label>
           </div>
+
+          <div class="shop-status">
+            <span id="result-count"></span>
+            <button id="clear-filters" class="text-button" type="button" data-i18n="shop.clear">clear filters</button>
+          </div>
+
+          <div id="product-grid" class="product-grid" aria-live="polite"></div>
+          <p id="empty-state" class="empty-state" data-i18n="shop.empty">No products found in this room.</p>
         </section>
 
         <section id="about" class="about-band section-grid">
@@ -130,51 +142,74 @@
           </div>
           <div class="about-copy">
             <p class="eyebrow" data-i18n="about.eyebrow">about kikuyu room</p>
-            <h2 data-i18n="about.title">made for people who save cute rooms, tiny objects, and old digital-camera light</h2>
+            <h2 data-i18n="about.title">a room you slowly build inside yourself</h2>
             <p data-i18n="about.copy">
-              The brand language is soft but not plain: y2k curves, Korean shop styling, dreamcore haze, and useful everyday pieces.
+              Room is not just a place. It stores old photos, half-written diaries, the mug on your desk, and a future room you have not moved into yet.
             </p>
-            <a class="soft-button" href="#diary" data-i18n="about.button">brand diary</a>
+            <p data-i18n="about.copyTwo">
+              Kikuyu Room believes in curation, not owning more. We choose small pieces that deserve to stay and help ordinary days become memorable.
+            </p>
+            <a class="soft-button" href="#room-notes" data-i18n="about.button">open room notes</a>
           </div>
         </section>
 
-        <section id="diary" class="section-block">
-          <h2 data-i18n="world.title">four tiny worlds</h2>
-          <div class="world-grid">
-            <article class="world-card pink"><span>★</span><h3 data-i18n="world.wear">room wear</h3><p data-i18n="world.wearSub">soft pieces for mirror photos</p></article>
-            <article class="world-card mint"><span>★</span><h3 data-i18n="world.charms">daily charms</h3><p data-i18n="world.charmsSub">clips, bows, beads and bags</p></article>
-            <article class="world-card blue"><span>★</span><h3 data-i18n="world.desk">paper desk</h3><p data-i18n="world.deskSub">stickers, memos and diaries</p></article>
-            <article class="world-card yellow"><span>★</span><h3 data-i18n="world.mood">home mood</h3><p data-i18n="world.moodSub">cups, trays and plush corners</p></article>
+        <section class="manifesto-band">
+          <p data-i18n="manifesto.one">We believe ordinary days deserve beautiful things.</p>
+          <p data-i18n="manifesto.two">We collect moments that deserve to stay.</p>
+        </section>
+
+        <section id="room-notes" class="section-block">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="notes.eyebrow">room notes</p>
+            <h2 data-i18n="notes.title">CCD photos, moodboards, and ways of living</h2>
+          </div>
+          <div class="notes-grid">
+            <article class="note-card">
+              <img src="assets/room-display.jpg" alt="CCD style room photo" />
+              <span>01</span>
+              <h3 data-i18n="notes.ccd">CCD photos</h3>
+              <p data-i18n="notes.ccdSub">soft flash, old camera light, tiny evidence of a day</p>
+            </article>
+            <article class="note-card">
+              <img src="assets/paper-goods.jpg" alt="Kikuyu moodboard" />
+              <span>02</span>
+              <h3 data-i18n="notes.moodboard">Moodboard</h3>
+              <p data-i18n="notes.moodboardSub">colors, rooms, paper textures, ribbons, and saved images</p>
+            </article>
+            <article class="note-card">
+              <img src="assets/home-goods.jpg" alt="Lifestyle home mood" />
+              <span>03</span>
+              <h3 data-i18n="notes.life">Lifestyle</h3>
+              <p data-i18n="notes.lifeSub">coffee walks, rainy lamps, Sunday trays, and slow rooms</p>
+            </article>
           </div>
         </section>
       </section>
 
       <section id="detail" class="page page-detail" data-page="detail">
-        <p class="breadcrumb" data-i18n="detail.breadcrumb">shop / accessories / pink ribbon shoulder bag</p>
+        <a class="breadcrumb" href="#shop" data-i18n="detail.back">shop / back to all products</a>
         <section class="detail-layout">
           <div class="gallery">
             <figure class="main-product-image">
-              <img src="assets/bag.jpg" alt="Pink ribbon shoulder bag" />
-              <figcaption>room favorite</figcaption>
+              <img id="detail-image" src="assets/products/memory-ribbon-bag.jpg" alt="Kikuyu Room product" />
+              <figcaption id="detail-world">room favorite</figcaption>
             </figure>
             <div class="thumbnail-row">
-              <img class="active" src="assets/bag.jpg" alt="Shoulder bag thumbnail" />
-              <img src="assets/accessories.jpg" alt="Accessories thumbnail" />
-              <img src="assets/paper-goods.jpg" alt="Paper goods thumbnail" />
-              <img src="assets/home-goods.jpg" alt="Home goods thumbnail" />
+              <img class="active" src="assets/products/memory-ribbon-bag.jpg" alt="Product thumbnail" />
+              <img src="assets/products/pocket-bear-clip.jpg" alt="Accessories thumbnail" />
+              <img src="assets/products/someday-notebook.jpg" alt="Paper goods thumbnail" />
+              <img src="assets/products/late-night-mug.jpg" alt="Home goods thumbnail" />
             </div>
           </div>
 
           <aside class="product-panel">
-            <span class="tag" data-i18n="detail.tag">new drop</span>
-            <h1 data-i18n="detail.title">pink ribbon shoulder bag</h1>
-            <p data-i18n="detail.subtitle">奶油包身配柔粉边 / cream body with soft pink trim</p>
-            <strong class="detail-price">$38</strong>
-            <p data-i18n="detail.copy">
-              A soft daily bag for room photos, cafe walks, sticker books, and tiny charms.
-            </p>
+            <span class="tag" id="detail-tag">new drop</span>
+            <h1 id="detail-title">Memory Ribbon Bag</h1>
+            <p id="detail-subtitle">记忆丝带包</p>
+            <strong class="detail-price" id="detail-price">$38</strong>
+            <p id="detail-copy">Not a pink bag, but a bag for memories.</p>
             <div class="option-group">
-              <p data-i18n="detail.color">color</p>
+              <p data-i18n="detail.color">color mood</p>
               <button class="swatch active pink-swatch" type="button" aria-label="Pink"></button>
               <button class="swatch blue-swatch" type="button" aria-label="Blue"></button>
               <button class="swatch cream-swatch" type="button" aria-label="Cream"></button>
@@ -195,28 +230,18 @@
         <section class="detail-info">
           <article class="story-card">
             <h2 data-i18n="detail.storyTitle">why it belongs in the room</h2>
-            <p data-i18n="detail.storyCopy">Styled for the kikuyu room universe: soft pink trim, light blue body, and enough surface for charms.</p>
+            <p id="detail-story">Every Kikuyu Room piece is a small coordinate of time: useful, soft, and easy to keep close.</p>
             <div class="mini-strip">
-              <img src="assets/accessories.jpg" alt="Accessory styling" />
-              <img src="assets/paper-goods.jpg" alt="Paper goods styling" />
-              <img src="assets/home-goods.jpg" alt="Home goods styling" />
+              <img src="assets/products/pocket-bear-clip.jpg" alt="Accessory styling" />
+              <img src="assets/products/someday-notebook.jpg" alt="Paper goods styling" />
+              <img src="assets/products/late-night-mug.jpg" alt="Home goods styling" />
             </div>
           </article>
           <div class="accordion-list">
-            <div><strong data-i18n="detail.materials">materials</strong><span data-i18n="detail.materialsBody">soft faux leather, printed front panel</span></div>
-            <div><strong data-i18n="detail.size">size</strong><span data-i18n="detail.sizeBody">phone, wallet, memo pad</span></div>
-            <div><strong data-i18n="detail.care">care</strong><span data-i18n="detail.careBody">wipe gently, avoid rain</span></div>
+            <div><strong data-i18n="detail.materials">materials</strong><span id="detail-materials">soft daily materials</span></div>
+            <div><strong data-i18n="detail.size">size</strong><span data-i18n="detail.sizeBody">room, desk, bag, or daily use</span></div>
+            <div><strong data-i18n="detail.care">care</strong><span data-i18n="detail.careBody">keep dry, wipe gently, store with care</span></div>
             <div><strong data-i18n="detail.shipping">shipping</strong><span data-i18n="detail.shippingBody">3-5 days processing</span></div>
-          </div>
-        </section>
-
-        <section class="section-block">
-          <h2 data-i18n="detail.complete">complete the room</h2>
-          <div class="product-grid recommendations">
-            <article class="product-card"><img src="assets/accessories.jpg" alt="Bear clip set" /><h3 data-i18n="product.clips">bear clip set</h3><strong>$12</strong></article>
-            <article class="product-card"><img src="assets/paper-goods.jpg" alt="Dream memo pad" /><h3 data-i18n="product.memo">dream folder memo pad</h3><strong>$9</strong></article>
-            <article class="product-card"><img src="assets/home-goods.jpg" alt="Cafe cup set" /><h3 data-i18n="product.cup">cream cafe cup set</h3><strong>$18</strong></article>
-            <article class="product-card"><img src="assets/room-display.jpg" alt="Room charm display" /><h3 data-i18n="product.room">room charm display</h3><strong>$24</strong></article>
           </div>
         </section>
       </section>
@@ -226,7 +251,7 @@
       <div>
         <a class="logo footer-logo" href="#home">k<span class="star-dot">i</span>kuyu room</a>
         <h2 data-i18n="footer.title">get the next room note</h2>
-        <p data-i18n="footer.copy">soft drops, styling notes, and small dreamy objects when they arrive.</p>
+        <p data-i18n="footer.copy">soft drops, styling notes, CCD photos, and small dreamy objects when they arrive.</p>
       </div>
       <form class="signup-form">
         <input type="email" data-i18n-placeholder="footer.email" placeholder="your email" />
