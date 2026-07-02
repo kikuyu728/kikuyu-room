@@ -13,7 +13,7 @@ Rather than creating a simple shopping demo, this project combines **brand ident
 
 ## 🌐 Live Demo / 在线预览
 
-👉 https://你的GitHubPages链接
+👉https://kikuyu728.github.io/kikuyu-room
 
 ---
 
