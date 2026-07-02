@@ -26,6 +26,12 @@ const categoryNames = {
   zh: { wear: "Room Wear 服饰", charms: "Daily Charms 配饰", paper: "Paper Desk 文具", home: "Home Mood 家居" }
 };
 
+const colorVariants = [
+  { id: "pink", en: "Blush pink", zh: "柔粉色" },
+  { id: "blue", en: "Dream blue", zh: "梦蓝色" },
+  { id: "cream", en: "Milk cream", zh: "奶油白" }
+];
+
 const translations = {
   en: {
     "nav.shop": "shop",
@@ -105,7 +111,7 @@ const translations = {
   zh: {
     "nav.shop": "商店",
     "nav.categories": "世界",
-    "nav.notes": "Room Notes",
+    "nav.notes": "房间笔记",
     "nav.about": "关于",
     "nav.enter": "进入房间",
     "home.eyebrow": "品牌世界观 / 盛放时间的容器",
@@ -143,13 +149,13 @@ const translations = {
     "sort.high": "价格从高到低",
     "sort.name": "名称 A-Z",
     "about.eyebrow": "关于 kikuyu room",
-    "about.title": "Some people remember their childhood\nthrough a toy.",
-    "about.copy": "Some remember it\nthrough the light\nthat entered their room every afternoon.",
-    "about.copyTwo": "We remember it\nthrough rooms.",
-    "about.button": "打开 Room Notes",
+    "about.title": "有些人通过一个玩具\n记住童年。",
+    "about.copy": "有些人通过每天下午\n照进房间的光\n记住童年。",
+    "about.copyTwo": "而我们\n通过房间记住它。",
+    "about.button": "打开房间笔记",
     "manifesto.one": "We believe ordinary days deserve beautiful things.",
     "manifesto.two": "We collect moments that deserve to stay.",
-    "notes.eyebrow": "Room Notes",
+    "notes.eyebrow": "房间笔记",
     "notes.title": "CCD照片、Moodboard和生活方式",
     "notes.ccd": "CCD照片",
     "notes.ccdSub": "柔软闪光、旧数码相机光感、一天留下来的证据",
@@ -181,6 +187,7 @@ const translations = {
 
 let currentLang = localStorage.getItem("kikuyu-lang") || "en";
 let selectedProductId = localStorage.getItem("kikuyu-product") || "memory-ribbon-bag";
+let selectedColor = localStorage.getItem("kikuyu-color") || "pink";
 
 const sky = document.querySelector(".sky");
 const colors = ["#fff", "#fedbe3", "#f1a2b9", "#b8dbc6", "#b8b0c9"];
@@ -280,12 +287,20 @@ function renderProducts() {
   emptyState.classList.toggle("active", items.length === 0);
 }
 
+function productVariantImage(product, color = selectedColor) {
+  return product.image.replace(".jpg", `-${color}.jpg`);
+}
+
+function setSelectedColor(color) {
+  selectedColor = colorVariants.some((item) => item.id === color) ? color : "pink";
+  localStorage.setItem("kikuyu-color", selectedColor);
+}
+
 function updateDetail() {
   const product = products.find((item) => item.id === selectedProductId) || products[5];
   const copy = product[currentLang];
-  const related = products.filter((item) => item.category === product.category && item.id !== product.id).slice(0, 3);
-  const thumbnails = [product, ...related];
-  document.querySelector("#detail-image").src = product.image;
+  const currentVariant = productVariantImage(product);
+  document.querySelector("#detail-image").src = currentVariant;
   document.querySelector("#detail-image").alt = copy.name;
   document.querySelector("#detail-world").textContent = categoryNames[currentLang][product.category];
   document.querySelector("#detail-tag").textContent = categoryNames[currentLang][product.category];
@@ -295,10 +310,21 @@ function updateDetail() {
   document.querySelector("#detail-copy").textContent = copy.story;
   document.querySelector("#detail-story").textContent = copy.story;
   document.querySelector("#detail-materials").textContent = product.material;
-  document.querySelector(".thumbnail-row").innerHTML = thumbnails.map((item, index) => {
-    const itemCopy = item[currentLang];
-    return `<img class="${index === 0 ? "active" : ""}" src="${item.image}" alt="${itemCopy.name}" />`;
+  document.querySelector(".thumbnail-row").innerHTML = colorVariants.map((variant) => {
+    const src = productVariantImage(product, variant.id);
+    const label = variant[currentLang];
+    return `<img class="${variant.id === selectedColor ? "active" : ""}" src="${src}" alt="${copy.name} - ${label}" data-color="${variant.id}" />`;
   }).join("");
+  document.querySelector(".mini-strip").innerHTML = colorVariants.map((variant) => {
+    const src = productVariantImage(product, variant.id);
+    const label = variant[currentLang];
+    return `<img src="${src}" alt="${copy.name} - ${label}" data-color="${variant.id}" />`;
+  }).join("");
+  document.querySelectorAll(".swatch").forEach((swatch) => {
+    swatch.classList.toggle("active", swatch.dataset.color === selectedColor);
+    const variant = colorVariants.find((item) => item.id === swatch.dataset.color);
+    if (variant) swatch.setAttribute("aria-label", variant[currentLang]);
+  });
   localStorage.setItem("kikuyu-product", product.id);
 }
 
@@ -314,6 +340,7 @@ document.addEventListener("click", (event) => {
   const productButton = event.target.closest("[data-open-product]");
   if (productButton) {
     selectedProductId = productButton.dataset.openProduct;
+    setSelectedColor("pink");
     updateDetail();
     location.hash = "#detail";
   }
@@ -349,10 +376,19 @@ document.querySelectorAll("[data-qty]").forEach((button) => {
   });
 });
 
+document.querySelector(".option-group").addEventListener("click", (event) => {
+  const swatch = event.target.closest("[data-color]");
+  if (!swatch) return;
+  setSelectedColor(swatch.dataset.color);
+  updateDetail();
+});
+
 document.querySelector(".thumbnail-row").addEventListener("click", (event) => {
   if (!event.target.matches("img")) return;
+  if (event.target.dataset.color) setSelectedColor(event.target.dataset.color);
   document.querySelector("#detail-image").src = event.target.src;
   document.querySelectorAll(".thumbnail-row img").forEach((image) => image.classList.toggle("active", image === event.target));
+  document.querySelectorAll(".swatch").forEach((swatch) => swatch.classList.toggle("active", swatch.dataset.color === selectedColor));
 });
 
 document.querySelector(".signup-form").addEventListener("submit", (event) => {
