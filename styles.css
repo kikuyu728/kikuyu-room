@@ -715,6 +715,7 @@ main,
 .about-copy h2 {
   max-width: 590px;
   font-size: clamp(36px, 4vw, 56px);
+  white-space: pre-line;
 }
 
 .about-copy p:not(.eyebrow) {
@@ -722,6 +723,7 @@ main,
   margin: 24px 0;
   font-size: 18px;
   line-height: 1.58;
+  white-space: pre-line;
 }
 
 .manifesto-band {
