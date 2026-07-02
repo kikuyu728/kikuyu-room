@@ -31,6 +31,7 @@ const colorVariants = [
   { id: "blue", en: "Dream blue", zh: "梦蓝色" },
   { id: "cream", en: "Milk cream", zh: "奶油白" }
 ];
+const productImageVersion = "real-color-1";
 
 const translations = {
   en: {
@@ -288,7 +289,7 @@ function renderProducts() {
 }
 
 function productVariantImage(product, color = selectedColor) {
-  return product.image.replace(".jpg", `-${color}.jpg`);
+  return `${product.image.replace(".jpg", `-${color}.jpg`)}?v=${productImageVersion}`;
 }
 
 function setSelectedColor(color) {
