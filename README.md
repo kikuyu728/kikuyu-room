@@ -1,115 +1,154 @@
-# 🌸 Kikuyu Room
+🌸 Kikuyu Room
 
-A soft aesthetic independent fashion brand website built with HTML, CSS, and JavaScript.  
-一个使用 HTML、CSS 和 JavaScript 构建的独立服装品牌风格网站。
+Ordinary days deserve beautiful things.
+平凡的日子，也值得拥有漂亮的东西。
 
-👉 Live Site / 在线地址：  
-https://kikuyu728.github.io/kikuyu-room/
+Kikuyu Room is an independent lifestyle brand website built around memory, imagination, and everyday life.
+Kikuyu Room 是一个围绕记忆、幻想与日常生活构建的独立生活方式品牌官网。
 
----
+Rather than creating a simple shopping demo, this project combines brand identity, UI/UX design, frontend development, and AI-assisted workflow into one complete portfolio project.
+这个项目不仅是一个商城练习，更是融合了品牌定位、UI/UX 设计、前端开发以及 AI 协同开发的完整作品集。
 
-## ✨ Project Overview / 项目简介
+✨ Project Overview / 项目简介
 
-**Kikuyu Room** is a fictional lifestyle & fashion brand website inspired by soft aesthetics, Y2K style, and Korean indie shop visuals.
+The brand is built around one simple idea:
 
-**Kikuyu Room** 是一个虚构的生活方式与服装品牌网站，灵感来源于柔和美学、Y2K风格以及韩系独立品牌视觉设计。
+品牌围绕着一个核心理念展开：
 
-The goal of this project is to practice building a **real-world frontend product from design to deployment**.
+A Room is not simply a place. It is a vessel for time.
+Room 不只是一个房间，它是承载时间的容器。
 
-该项目目标是练习从设计到上线，完整构建一个真实可用的前端产品。
+Every product belongs to one of the Four Tiny Worlds, representing different ways of living instead of traditional product categories.
 
----
+每一件商品都属于 Four Tiny Worlds（四个微小世界） 中的一个世界，它们代表的是一种生活方式，而不是传统的商品分类。
 
-## 🚀 Features / 功能特点
+This project simulates the complete workflow of building a modern independent brand—from concept to deployment.
 
-- 🏠 Brand landing page / 品牌首页
-- 🛍️ Product grid display / 商品展示布局
-- 📄 Product detail page / 商品详情页
-- 🌈 Category-based structure / 分类展示结构
-- 🌍 i18n-ready (EN/中文结构) / 国际化结构支持
-- 🖼️ Image-based product system / 图片商品展示系统
-- 📱 Responsive layout / 响应式布局
-- 🎯 Interactive UI elements / 基础交互功能
+整个项目模拟了一个独立品牌从品牌策划 → 页面设计 → 前端开发 → 网站部署的完整流程。
 
----
-
-## 🧠 Tech Stack / 技术栈
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Responsive Web Design / 响应式设计
-- Git & GitHub
-- GitHub Pages (deployment / 部署)
-- OpenAI Codex (AI-assisted development / AI协同开发)
-
----
-
-## 🤖 AI-Assisted Development / AI协同开发说明
-
-This project was built with the help of **OpenAI Codex** as an AI pair programming tool.
-
-本项目使用 OpenAI Codex 作为 AI 结对编程工具辅助开发。
-
-Codex was used for:
-Codex 用于：
-
-- Code generation and scaffolding / 代码生成与搭建
-- Debugging and optimization / 调试与优化
-- UI interaction logic / 前端交互逻辑
-- Rapid prototyping / 快速原型开发
-
-The developer is responsible for:
-开发者负责：
-
-- UI/UX design decisions / 设计决策
-- Feature planning / 功能规划
-- Code review and modification / 代码审查与修改
-- Final deployment / 最终部署上线
-
----
-
-## 📁 Project Structure / 项目结构
-kikuyu-room/
+🚀 Features / 项目功能
+Brand Website / 品牌官网
+Independent Brand Landing Page / 独立品牌首页
+Four Tiny Worlds / 四个品牌世界
+About Page / 品牌介绍页面
+Room Notes / 品牌内容页面
+Shopping Experience / 商城交互
+Product Search / 商品搜索
+Category Filter / 分类筛选
+Product Sorting / 商品排序
+Product Detail Page / 商品详情页
+Quick View Modal / 商品快速预览
+Shopping Functions / 商城功能
+❤️ Favorites (LocalStorage) / 收藏夹（本地持久化）
+🛒 Shopping Cart (LocalStorage) / 购物车（本地持久化）
+Quantity Selector / 商品数量调整
+Responsive Layout / 响应式布局
+EN / 中文 Language Switch / 中英文切换
+🛠 Tech Stack / 技术栈
+Frontend / 前端
+HTML5
+CSS3
+JavaScript (ES6)
+Development / 开发工具
+Git
+GitHub
+GitHub Pages (Deployment / 网站部署)
+Browser APIs / 浏览器能力
+DOM Manipulation / DOM 操作
+Event Listener / 事件监听
+LocalStorage / 本地数据持久化
+Hash Routing / Hash 路由
+AI-assisted Development / AI 协同开发
+OpenAI Codex
+AI Pair Programming / AI 结对编程
+AI-assisted Debugging / AI 调试
+AI-assisted Refactoring / AI 重构
+📂 Project Structure / 项目结构
+kikuyu-room
 │
-├── index.html # Main page / 主页面
-├── styles.css # Styles / 样式文件
-├── script.js # Interactions / 交互逻辑
-├── assets/ # Images / 图片资源
-│ ├── hero-room.png
-│ ├── bag.jpg
-│ ├── accessories.jpg
-│ ├── paper-goods.jpg
-│ ├── home-goods.jpg
-│ └── room-display.jpg
+├── index.html
+├── styles.css
+├── script.js
+├── assets/
+│   ├── products/
+│   ├── hero/
+│   ├── room-notes/
+│   └── icons/
+│
+└── README.md
+🌸 Project Highlights / 项目亮点
 
----
+Instead of creating a simple shopping website, I wanted to build a complete independent brand experience.
 
-## 🎯 Future Improvements / 后续优化方向
+相比普通商城练习项目，我希望它更接近一个真正的独立品牌。
 
-- 🛒 Shopping cart system / 购物车系统
-- 🔍 Product search & filtering / 商品搜索筛选
-- 🌙 Dark mode toggle / 深色模式
-- ❤️ Favorite system / 收藏功能
-- 🧾 Backend integration / 后端接入
-- 💳 Checkout system / 支付系统
+This project includes:
 
----
+本项目独立完成了：
 
-## 👩‍💻 Author / 作者
+Brand Positioning / 品牌定位
+Brand Storytelling / 品牌世界观设计
+Information Architecture / 页面信息架构
+UI / UX Design / 用户体验设计
+Frontend Development / 前端开发
+Interactive Shopping Experience / 商城交互设计
 
-Built by **kikuyu728**
+The product naming system follows the Moment + Object principle to make every item feel like a memory rather than just a product.
 
-Frontend Developer & AI-assisted builder  
-前端开发者 & AI协同开发实践者
+商品命名采用 Moment + Object（时刻 + 物件） 的方式，希望每件商品都像一段值得留下来的记忆，而不仅仅是一件商品。
 
-Focused on combining design taste + AI coding workflow to build real-world products.
+🤖 AI-assisted Development / AI 协同开发
 
-专注于结合设计审美 + AI编程工作流，构建真实可用的产品。
+OpenAI Codex was used as an AI pair-programming tool throughout the development process.
 
----
+项目开发过程中使用 OpenAI Codex 作为 AI 结对编程工具。
 
-## 📌 License / 说明
+AI Responsibilities / AI 负责
+Code Generation / 代码生成
+Debugging / Bug 调试
+Feature Implementation / 功能实现
+Refactoring Suggestions / 重构建议
+UI Optimization / 页面优化
+My Responsibilities / 我负责
+Product Planning / 产品规划
+Brand Identity / 品牌定位
+UI / UX Design / 页面设计
+Feature Design / 功能设计
+Code Review / 代码审查
+Final Integration / 功能整合
+Deployment / 网站部署
+📈 Roadmap / 后续开发计划
+User Authentication / 用户登录
+Order System / 订单系统
+Backend API / 后端接口
+Database Integration / 数据库接入
+React Version / React 重构版本
+Mobile App / App 版本
+Mini Program / 微信小程序
+💡 What I Learned / 项目收获
 
-This project is for portfolio and learning purposes.  
-该项目仅用于作品集与学习用途。
+Through this project, I experienced the complete process of building a digital product from 0 → 1.
+
+通过这个项目，我完整体验了一个互联网产品从 0 → 1 的开发过程，包括：
+
+Brand Strategy / 品牌策划
+Product Thinking / 产品思维
+UI Design / UI 设计
+Frontend Development / 前端开发
+Git Version Control / Git 版本管理
+GitHub Pages Deployment / 网站部署
+AI-assisted Development Workflow / AI 协同开发流程
+👩‍💻 Author / 作者
+
+kikuyu728
+
+AI Builder · Frontend Developer · Product Explorer
+AI 产品开发者 · 前端开发者 · 产品探索者
+
+Building digital products with AI, design and code.
+用 AI、设计与代码，创造有温度的数字产品。
+
+📜 License / 开源协议
+
+For learning and portfolio purposes only.
+本项目仅用于学习交流与个人作品集展示。
