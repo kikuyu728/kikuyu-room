@@ -189,6 +189,17 @@ const translations = {
 let currentLang = localStorage.getItem("kikuyu-lang") || "en";
 let selectedProductId = localStorage.getItem("kikuyu-product") || "memory-ribbon-bag";
 let selectedColor = localStorage.getItem("kikuyu-color") || "pink";
+let activePanel = "cart";
+let quickProductId = "memory-ribbon-bag";
+
+const storageKeys = {
+  favorites: "kikuyu-favorites",
+  cart: "kikuyu-cart"
+};
+
+// Favorites and cart live in localStorage so the static GitHub Pages site keeps state after refresh.
+let favorites = new Set(readStoredArray(storageKeys.favorites));
+let cart = readStoredArray(storageKeys.cart);
 
 const sky = document.querySelector(".sky");
 const colors = ["#fff", "#fedbe3", "#f1a2b9", "#b8dbc6", "#b8b0c9"];
@@ -198,6 +209,15 @@ const categoryFilter = document.querySelector("#category-filter");
 const sortSelect = document.querySelector("#sort-products");
 const resultCount = document.querySelector("#result-count");
 const emptyState = document.querySelector("#empty-state");
+const favoriteCount = document.querySelector("#favorite-count");
+const cartCount = document.querySelector("#cart-count");
+const drawerBackdrop = document.querySelector(".drawer-backdrop");
+const shopPanel = document.querySelector("#shop-panel");
+const panelTitle = document.querySelector("#panel-title");
+const panelKicker = document.querySelector("#panel-kicker");
+const panelList = document.querySelector("#panel-list");
+const panelFooter = document.querySelector("#panel-footer");
+const quickView = document.querySelector("#quick-view");
 
 for (let i = 0; i < 90; i += 1) {
   const star = document.createElement("span");
@@ -213,6 +233,46 @@ for (let i = 0; i < 90; i += 1) {
 
 function t(key) {
   return translations[currentLang][key] || translations.en[key] || key;
+}
+
+function readStoredArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCommerceState() {
+  localStorage.setItem(storageKeys.favorites, JSON.stringify([...favorites]));
+  localStorage.setItem(storageKeys.cart, JSON.stringify(cart));
+  updateHeaderCounts();
+}
+
+function updateHeaderCounts() {
+  favoriteCount.textContent = String(favorites.size);
+  cartCount.textContent = String(cart.reduce((sum, item) => sum + item.qty, 0));
+}
+
+function getProduct(productId) {
+  return products.find((product) => product.id === productId);
+}
+
+function money(price) {
+  return `$${price}`;
+}
+
+function cartKey(productId, color) {
+  return `${productId}:${color}`;
+}
+
+function productMoment(product) {
+  return product[currentLang].story;
+}
+
+function shortText(text, max = 92) {
+  return text.length > max ? `${text.slice(0, max).trim()}...` : text;
 }
 
 function setLanguage(lang) {
@@ -232,6 +292,8 @@ function setLanguage(lang) {
   localStorage.setItem("kikuyu-lang", lang);
   renderProducts();
   updateDetail();
+  if (shopPanel.classList.contains("open")) renderPanel(activePanel);
+  if (quickView.classList.contains("open")) renderQuickView();
 }
 
 function getFilteredProducts() {
@@ -264,22 +326,33 @@ function getFilteredProducts() {
 
 function renderProducts() {
   const items = getFilteredProducts();
+  // Product cards are rendered from the single products array to keep shop, quick view, and cart in sync.
   productGrid.innerHTML = items.map((product) => {
-    const copy = product[currentLang];
+    const enCopy = product.en;
+    const zhCopy = product.zh;
+    const liked = favorites.has(product.id);
     return `
       <article class="product-card" data-product-id="${product.id}">
-        <button class="product-image-button" type="button" data-open-product="${product.id}" aria-label="${copy.name}">
-          <img src="${product.image}" alt="${copy.name}" />
+        <div class="product-card-top">
+          <span class="new-pill">NEW</span>
+          <button class="favorite-button ${liked ? "active" : ""}" type="button" data-toggle-favorite="${product.id}" aria-label="${liked ? "Remove from favorites" : "Add to favorites"}">
+            ${liked ? "♥" : "♡"}
+          </button>
+        </div>
+        <button class="product-image-button" type="button" data-open-product="${product.id}" aria-label="${enCopy.name}">
+          <img src="${product.image}" alt="${enCopy.name}" />
         </button>
         <div class="product-meta">
           <span>${categoryNames[currentLang][product.category]}</span>
-          <strong>$${product.price}</strong>
+          <strong>${money(product.price)}</strong>
         </div>
-        <h3>${copy.name}</h3>
-        <p>${copy.subtitle}</p>
-        <button class="text-button product-link" type="button" data-open-product="${product.id}">
-          ${currentLang === "zh" ? "查看详情" : "view details"}
-        </button>
+        <h3>${enCopy.name}</h3>
+        <p class="product-zh">${zhCopy.name}</p>
+        <p class="product-moment"><span>Moment</span>${shortText(productMoment(product))}</p>
+        <div class="product-card-actions">
+          <button class="secondary-button compact-button" type="button" data-quick-view="${product.id}">Quick View</button>
+          <button class="primary-button compact-button" type="button" data-card-add-cart="${product.id}">Add to Cart</button>
+        </div>
       </article>
     `;
   }).join("");
@@ -295,6 +368,156 @@ function productVariantImage(product, color = selectedColor) {
 function setSelectedColor(color) {
   selectedColor = colorVariants.some((item) => item.id === color) ? color : "pink";
   localStorage.setItem("kikuyu-color", selectedColor);
+}
+
+function toggleFavorite(productId) {
+  if (favorites.has(productId)) {
+    favorites.delete(productId);
+  } else {
+    favorites.add(productId);
+  }
+  saveCommerceState();
+  renderProducts();
+  updateDetail();
+  if (activePanel === "favorites" && shopPanel.classList.contains("open")) renderPanel("favorites");
+}
+
+function addToCart(productId, color = selectedColor, qty = 1) {
+  const product = getProduct(productId);
+  if (!product) return;
+  const key = cartKey(productId, color);
+  const existing = cart.find((item) => item.key === key);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ key, productId, color, qty });
+  }
+  saveCommerceState();
+  renderPanel("cart");
+  openPanel("cart");
+}
+
+function changeCartQty(key, delta) {
+  const item = cart.find((entry) => entry.key === key);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty < 1) {
+    cart = cart.filter((entry) => entry.key !== key);
+  }
+  saveCommerceState();
+  renderPanel("cart");
+}
+
+function removeCartItem(key) {
+  cart = cart.filter((entry) => entry.key !== key);
+  saveCommerceState();
+  renderPanel("cart");
+}
+
+function openPanel(type) {
+  activePanel = type;
+  renderPanel(type);
+  drawerBackdrop.hidden = false;
+  shopPanel.classList.add("open");
+  shopPanel.setAttribute("aria-hidden", "false");
+}
+
+function closePanel() {
+  drawerBackdrop.hidden = true;
+  shopPanel.classList.remove("open");
+  shopPanel.setAttribute("aria-hidden", "true");
+}
+
+function renderPanel(type) {
+  panelKicker.textContent = "kikuyu room";
+  panelTitle.textContent = type === "favorites" ? "Favorites" : "Cart";
+  if (type === "favorites") {
+    renderFavoritesPanel();
+  } else {
+    renderCartPanel();
+  }
+}
+
+function renderFavoritesPanel() {
+  const items = [...favorites].map(getProduct).filter(Boolean);
+  panelList.innerHTML = items.length ? items.map((product) => {
+    const copy = product[currentLang];
+    return `
+      <article class="panel-item">
+        <img src="${productVariantImage(product, "pink")}" alt="${copy.name}" />
+        <div>
+          <h3>${product.en.name}</h3>
+          <p>${product.zh.name}</p>
+          <strong>${money(product.price)}</strong>
+          <div class="panel-row-actions">
+            <button type="button" class="text-button" data-quick-view="${product.id}">Quick View</button>
+            <button type="button" class="text-button" data-remove-favorite="${product.id}">Remove</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("") : `<p class="panel-empty">No saved room objects yet.</p>`;
+  panelFooter.innerHTML = `<button class="soft-button panel-wide-button" type="button" data-close-panel>keep browsing</button>`;
+}
+
+function renderCartPanel() {
+  // Cart items are keyed by product + color so each colorway can have its own quantity.
+  const total = cart.reduce((sum, item) => {
+    const product = getProduct(item.productId);
+    return product ? sum + product.price * item.qty : sum;
+  }, 0);
+
+  panelList.innerHTML = cart.length ? cart.map((item) => {
+    const product = getProduct(item.productId);
+    if (!product) return "";
+    const copy = product[currentLang];
+    const color = colorVariants.find((variant) => variant.id === item.color) || colorVariants[0];
+    return `
+      <article class="panel-item cart-item">
+        <img src="${productVariantImage(product, item.color)}" alt="${copy.name}" />
+        <div>
+          <h3>${product.en.name}</h3>
+          <p>${product.zh.name} / ${color[currentLang]}</p>
+          <strong>${money(product.price)}</strong>
+          <div class="cart-qty">
+            <button type="button" data-cart-qty="${item.key}" data-delta="-1">-</button>
+            <span>${item.qty}</span>
+            <button type="button" data-cart-qty="${item.key}" data-delta="1">+</button>
+            <button type="button" class="text-button" data-remove-cart="${item.key}">Remove</button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("") : `<p class="panel-empty">Your cart is waiting for soft things.</p>`;
+
+  panelFooter.innerHTML = `
+    <div class="cart-total"><span>Total</span><strong>${money(total)}</strong></div>
+    <button class="primary-button panel-wide-button" type="button">checkout soon</button>
+  `;
+}
+
+function openQuickView(productId) {
+  quickProductId = productId;
+  renderQuickView();
+  quickView.classList.add("open");
+  quickView.setAttribute("aria-hidden", "false");
+}
+
+function closeQuickView() {
+  quickView.classList.remove("open");
+  quickView.setAttribute("aria-hidden", "true");
+}
+
+function renderQuickView() {
+  const product = getProduct(quickProductId);
+  if (!product) return;
+  document.querySelector("#quick-image").src = productVariantImage(product, "pink");
+  document.querySelector("#quick-image").alt = product[currentLang].name;
+  document.querySelector("#quick-title").textContent = product.en.name;
+  document.querySelector("#quick-zh").textContent = product.zh.name;
+  document.querySelector("#quick-moment").textContent = productMoment(product);
+  document.querySelector("#quick-price").textContent = money(product.price);
+  document.querySelector("#quick-favorite").textContent = favorites.has(product.id) ? "♥ saved" : "♡ save";
 }
 
 function updateDetail() {
@@ -346,6 +569,49 @@ document.addEventListener("click", (event) => {
     location.hash = "#detail";
   }
 
+  const favoriteButton = event.target.closest("[data-toggle-favorite]");
+  if (favoriteButton) {
+    toggleFavorite(favoriteButton.dataset.toggleFavorite);
+  }
+
+  const cardCartButton = event.target.closest("[data-card-add-cart]");
+  if (cardCartButton) {
+    addToCart(cardCartButton.dataset.cardAddCart, "pink", 1);
+  }
+
+  const quickButton = event.target.closest("[data-quick-view]");
+  if (quickButton) {
+    openQuickView(quickButton.dataset.quickView);
+  }
+
+  const panelButton = event.target.closest("[data-open-panel]");
+  if (panelButton) {
+    openPanel(panelButton.dataset.openPanel);
+  }
+
+  if (event.target.closest("[data-close-panel]")) {
+    closePanel();
+  }
+
+  if (event.target.closest("[data-close-quick]")) {
+    closeQuickView();
+  }
+
+  const removeFavoriteButton = event.target.closest("[data-remove-favorite]");
+  if (removeFavoriteButton) {
+    toggleFavorite(removeFavoriteButton.dataset.removeFavorite);
+  }
+
+  const cartQtyButton = event.target.closest("[data-cart-qty]");
+  if (cartQtyButton) {
+    changeCartQty(cartQtyButton.dataset.cartQty, Number(cartQtyButton.dataset.delta));
+  }
+
+  const removeCartButton = event.target.closest("[data-remove-cart]");
+  if (removeCartButton) {
+    removeCartItem(removeCartButton.dataset.removeCart);
+  }
+
   const filterLink = event.target.closest("[data-filter-link]");
   if (filterLink) {
     categoryFilter.value = filterLink.dataset.filterLink;
@@ -377,6 +643,15 @@ document.querySelectorAll("[data-qty]").forEach((button) => {
   });
 });
 
+document.querySelector("[data-detail-add-cart]").addEventListener("click", () => {
+  const qty = Number(document.querySelector("#qty").textContent);
+  addToCart(selectedProductId, selectedColor, qty);
+});
+
+document.querySelector("[data-detail-save]").addEventListener("click", () => {
+  toggleFavorite(selectedProductId);
+});
+
 document.querySelector(".option-group").addEventListener("click", (event) => {
   const swatch = event.target.closest("[data-color]");
   if (!swatch) return;
@@ -400,6 +675,23 @@ document.querySelector(".signup-form").addEventListener("submit", (event) => {
   setTimeout(() => {
     button.textContent = original;
   }, 1300);
+});
+
+document.querySelector("#quick-cart").addEventListener("click", () => {
+  addToCart(quickProductId, "pink", 1);
+});
+
+document.querySelector("#quick-favorite").addEventListener("click", () => {
+  toggleFavorite(quickProductId);
+  renderQuickView();
+});
+
+document.querySelector("#quick-detail").addEventListener("click", () => {
+  selectedProductId = quickProductId;
+  setSelectedColor("pink");
+  updateDetail();
+  closeQuickView();
+  location.hash = "#detail";
 });
 
 window.addEventListener("hashchange", showPageFromHash);
@@ -445,3 +737,4 @@ function setupReveal() {
 setLanguage(currentLang);
 showPageFromHash();
 setupReveal();
+updateHeaderCounts();

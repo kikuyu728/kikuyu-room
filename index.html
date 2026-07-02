@@ -25,6 +25,14 @@
           <button class="lang-btn active" data-lang="en" type="button">EN</button>
           <button class="lang-btn" data-lang="zh" type="button">中文</button>
         </div>
+        <button class="header-count-button" type="button" data-open-panel="favorites" aria-label="Open favorites">
+          <span>♡</span>
+          <strong id="favorite-count">0</strong>
+        </button>
+        <button class="header-count-button cart-count-button" type="button" data-open-panel="cart" aria-label="Open cart">
+          <span>Cart</span>
+          <strong id="cart-count">0</strong>
+        </button>
         <a class="soft-button desktop-only" href="#shop" data-i18n="nav.enter">enter the room</a>
         <button class="menu-button" type="button" aria-label="Open menu">
           <span></span>
@@ -219,9 +227,9 @@
                 <span id="qty">1</span>
                 <button type="button" data-qty="1">+</button>
               </div>
-              <button class="primary-button cart-button" type="button" data-i18n="detail.cart">add to cart</button>
+              <button class="primary-button cart-button" type="button" data-detail-add-cart data-i18n="detail.cart">add to cart</button>
             </div>
-            <button class="secondary-button wide" type="button" data-i18n="detail.save">save for later</button>
+            <button class="secondary-button wide" type="button" data-detail-save data-i18n="detail.save">save for later</button>
             <p class="shipping-note" data-i18n="detail.shipMini">ships in 3-5 days / gift wrapping available</p>
           </aside>
         </section>
@@ -257,6 +265,38 @@
         <button type="submit" data-i18n="footer.join">join</button>
       </form>
     </footer>
+
+    <div class="drawer-backdrop" data-close-panel hidden></div>
+    <aside class="side-panel" id="shop-panel" aria-hidden="true">
+      <div class="panel-header">
+        <div>
+          <span class="panel-kicker" id="panel-kicker">kikuyu room</span>
+          <h2 id="panel-title">Cart</h2>
+        </div>
+        <button class="panel-close" type="button" data-close-panel aria-label="Close panel">×</button>
+      </div>
+      <div class="panel-list" id="panel-list"></div>
+      <div class="panel-footer" id="panel-footer"></div>
+    </aside>
+
+    <section class="quick-view" id="quick-view" aria-hidden="true">
+      <div class="quick-view-card">
+        <button class="panel-close quick-close" type="button" data-close-quick aria-label="Close quick view">×</button>
+        <img id="quick-image" src="assets/products/memory-ribbon-bag-pink.jpg" alt="Quick view product" />
+        <div class="quick-copy">
+          <span class="tag">NEW</span>
+          <h2 id="quick-title">Memory Ribbon Bag</h2>
+          <p id="quick-zh">记忆丝带包</p>
+          <p id="quick-moment"></p>
+          <strong id="quick-price">$38</strong>
+          <div class="quick-actions">
+            <button class="secondary-button" type="button" id="quick-favorite">♡ save</button>
+            <button class="primary-button" type="button" id="quick-cart">add to cart</button>
+            <button class="text-button" type="button" id="quick-detail">view details</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <script src="script.js"></script>
   </body>
