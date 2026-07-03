@@ -800,7 +800,6 @@ const revealTargets = [
   ".hero-image",
   ".section-block",
   ".category-card",
-  ".product-card",
   ".about-band",
   ".photo-stack",
   ".about-copy",
