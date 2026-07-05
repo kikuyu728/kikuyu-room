@@ -798,7 +798,6 @@ window.addEventListener("hashchange", showPageFromHash);
 const revealTargets = [
   ".hero-copy",
   ".hero-image",
-  ".section-block",
   ".category-card",
   ".about-band",
   ".photo-stack",

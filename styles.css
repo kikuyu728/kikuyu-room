@@ -619,6 +619,13 @@ main,
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.shop-section.reveal,
+.shop-section.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
 .product-card {
   position: relative;
   min-width: 0;
